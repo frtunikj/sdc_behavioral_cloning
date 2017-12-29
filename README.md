@@ -16,14 +16,6 @@ About the project
 ---
 An explanation of the files in this repository, the processing pipeline for behavioral cloning, as well as suggestions for further improvements can be found [here](https://github.com/frtunikj/sdc_behavioral_cloning/blob/master/writeup.md). 
 
-Goals of the project
----
-The goals / steps of this project were the following:
-* Use the simulator to collect data of good driving behavior 
-* Design, train and validate a model that predicts a steering angle from image data
-* Use the model to drive the vehicle autonomously around the first track in the simulator. The vehicle should remain on the road for an entire loop around the track.
-* Summarize the results with a written report
-
 Project environment installation
 ---
 This lab requires:

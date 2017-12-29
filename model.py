@@ -82,6 +82,7 @@ def modifiedNVidiaCNNModel():
     model.add(Dropout(0.5))
     model.add(Dense(10))
     model.add(Dense(1))
+    model.summary()
     return model
 
 #################################################################
