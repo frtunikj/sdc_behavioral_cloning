@@ -1,21 +1,5 @@
 # **Behavioral Cloning** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
----
-
-**Behavioral Cloning Project**
-
-The goals / steps of this project are the following:
-* Use the simulator to collect data of good driving behavior
-* Build, a convolution neural network in Keras that predicts steering angles from images
-* Train and validate the model with a training and validation set
-* Test that the model successfully drives around track one without leaving the road
-* Summarize the results with a written report
-
-
 [//]: # (Image References)
 
 [image1]: ./examples/placeholder.png "Model Visualization"
@@ -26,29 +10,26 @@ The goals / steps of this project are the following:
 [image6]: ./examples/placeholder_small.png "Normal Image"
 [image7]: ./examples/placeholder_small.png "Flipped Image"
 
-## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
+### Repository Files Description
 
----
-### Files Submitted & Code Quality
+This repository includes the following files:
 
-#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
+* [model.py](https://github.com/frtunikj/sdc_behavioral_cloning/blob/master/model.py) - script used to create and train the model
+* [dataVizualization.py](https://github.com/frtunikj/sdc_behavioral_cloning/blob/master/dataVizualization.py) contains functions for visualizing the distribution of steering angles/measurements
+* [drive.py](https://github.com/frtunikj/sdc_behavioral_cloning/blob/master/drive.py) - script to drive the car (provided by Udacity)
+* [model.h5](https://github.com/frtunikj/sdc_behavioral_cloning/blob/master/model.h5) - a trained Keras model
+* [video.mp4](https://github.com/frtunikj/sdc_behavioral_cloning/blob/master/video.mp4) - a video recording of the vehicle driving autonomously around the track for at least one full lap
 
-My project includes the following files:
-* model.py containing the script to create and train the model
-* drive.py for driving the car in autonomous mode
-* model.h5 containing a trained convolution neural network 
-* writeup_report.md or writeup_report.pdf summarizing the results
+Using the Udacity simulator and my drive.py file, the car can be driven autonomously around the track by executing
 
-#### 2. Submission includes functional code
-Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
-```sh
+```
 python drive.py model.h5
 ```
+### Solution Design Approach
 
-#### 3. Submission code is usable and readable
+For deriving a model architecture that can autonomously drive successively was to introduce more complexity (convolutional layers) into the neural network model, while extending/refining the training data until a satisfactory performance was achieved. What does a good performance mean for this neural network model? Good performance means no over- or under-fitting, low mean-squared-error, and staying on-track in the simulator in autonomous mode.
 
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
+Udacity provided very well guideline how to start and proceed with the building of the neural network i.e. start out with a simple network with a single convolutional layer, mainly out of curiosity to see how well it would perform. In order to see how the simple network performed, the data (image and steering angle measurements) was split into a training and validation set. After the training the network had quite high mean-squared-errors (MSE), indicating that the model was significantly underfitting. Udacity provided a hint w.r.t. more sophisticated network that NVIDIA used for end to end learning. The paper [End to End Learning for Self-Driving Cars](https://arxiv.org/pdf/1604.07316v1.pdf) provided a detailed description of the architecture and the data collection and preprocessing steps. A sli# modified version of the NVIDIA CNN was implemented and some of the data preprocessing techniques were applied (see below for detailed description) and as a result the vehicle was able to drive autonomously around the first track in the simulator without leaving the road.
 
 ### Model Architecture and Training Strategy
 
