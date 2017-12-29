@@ -52,7 +52,7 @@ The final model architecture (see modifiedNVidiaCNNModel() in model.py lines 67-
 
 ![alt text][image1]
 
-First the model as depicted in the image was reproduced - including image cropping top 70 pixels and the bottom 25 pixels, normalization using a Keras Lambda function (see in model.py line 72, lambda x: (x / 255) - 0.5), with three 5x5 convolution layers with 2x2 striding, two 3x3 convolution layers, and three fully-connected layers. In the paper it is not mentioned any sort of activation function or means of mitigating overfitting. In the final model the RELU activation functions on each fully-connected layer, and dropout (with a keep probability of 0.5) was chosen. The Adam optimizer was chosen with default parameters and the chosen loss function was mean squared error (MSE). The last two parameters were also suggested by Udacity. Below the final architecture is depicted:
+First the model as depicted in the image was reproduced - including image cropping top 70 pixels and the bottom 25 pixels, normalization using a Keras Lambda function (see in model.py line 72, lambda x: (x / 255) - 0.5), with three 5x5 convolution layers with 2x2 striding, two 3x3 convolution layers, and three fully-connected layers. In the paper it is not mentioned any sort of activation function or means of mitigating overfitting. In the final model the RELU activation functions on each fully-connected layer, and dropout (with a keep probability of 0.5) was chosen. The Adam optimizer was chosen with default parameters and the chosen loss function was mean squared error (MSE). The last two parameters were also suggested by Udacity. Below the final architecture is depicted by using the Keras function model.summary().
 
 ![alt text][image2]
 
