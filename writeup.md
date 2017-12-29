@@ -73,7 +73,7 @@ unnecessarily and only use the memory that we need to use at a time.
 
 The data was randomly shuffled before (see in model.py line 111) splitting it into training data (80 %) and validation data (20%). In total, I had 19286 training data points and 4822 validation data points. 
 
-#### Data preprocessing
+#### Data Preprocessing
 
 The data preprocessing employed was simple and consisted of two steps:
 
@@ -94,6 +94,14 @@ The validation set helped determine if the model was over or under fitting. The 
 
 ![alt text][image4]
 
+#### Possible Improvements
+
+Possible improvement could be the following:
+
+* collect or generate more data e.g. different tracks with different road surface, diverse weather and lightning conditions. 
+* use transfer learning i.e. use a predefined network as it is (frosen weights) or modify partly a pretrained network.
+
+The two improvements can lead to more robust network model that can drive on different tracks. 
 ###  References
 
 Further useful readings:
