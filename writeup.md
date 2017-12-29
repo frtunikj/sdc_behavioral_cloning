@@ -44,15 +44,15 @@ Udacity provided very well guideline how to start and proceed with the building 
 
 #### 1. Starting Architecture 
 
-As mentioned above the way to finding the final solution was started by a simple model containing a single convolution layer, and gradually introducing more complexity. As suggested by Udacity, the NVidia model (https://arxiv.org/pdf/1604.07316v1.pdf) was implemented with a slight addition i.e. the dropout layers. The decision to introduce the dropout layers was in order to avoid overfitting. One could potentially use L1 or L2 regularization for the same purpose. In addition, an image-cropping layer and a normalization of the date at the beginning of the network was introduced. Last but not least, a new layer at the end was added in order to have a single output as it was required i.e. the steering angle. 
+As mentioned above the way to finding the final solution was started by a simple model containing a single convolution layer, and gradually introducing more complexity. As suggested by Udacity, the NVidia model (https://arxiv.org/pdf/1604.07316v1.pdf) was implemented with a slight addition i.e. L2 Regularization. The decision to introduce the L2 Regularization was in order to avoid overfitting. One could potentially use L1 or dropout for the same purpose. In addition, an image-cropping layer and a normalization of the date at the beginning of the network was introduced. Last but not least, a new layer at the end was added in order to have a single output as it was required i.e. the steering angle. 
 
 #### 2. Final Model Architecture
 
-The final model architecture (see modifiedNVidiaCNNModel() in model.py lines 67-85) is based on the NVidia architecture which is shown below. 
+The final model architecture (see modifiedNVidiaCNNModel() in model.py lines 69-88) is based on the NVidia architecture which is shown below. 
 
 ![alt text][image1]
 
-First the model as depicted in the image was reproduced - including image cropping top 70 pixels and the bottom 25 pixels, normalization using a Keras Lambda function (see in model.py line 72, lambda x: (x / 255) - 0.5), with three 5x5 convolution layers with 2x2 striding, two 3x3 convolution layers, and three fully-connected layers. In the paper it is not mentioned any sort of activation function or means of mitigating overfitting. In the final model the RELU activation functions on each fully-connected layer, and dropout (with a keep probability of 0.5) was chosen. The Adam optimizer was chosen with default parameters and the chosen loss function was mean squared error (MSE). The last two parameters were also suggested by Udacity. Below the final architecture is depicted by using the Keras function model.summary().
+First the model as depicted in the image was reproduced - including image cropping top 70 pixels and the bottom 25 pixels, normalization using a Keras Lambda function (see in model.py line 74, lambda x: (x / 255) - 0.5), with three 5x5 convolution layers with 2x2 striding, two 3x3 convolution layers, and three fully-connected layers. In the paper it is not mentioned any sort of activation function or means of mitigating overfitting. In the final model the RELU activation functions on each fully-connected layer, and L2 regularization was chosen. The Adam optimizer was chosen with default parameters and the chosen loss function was mean squared error (MSE). The last two parameters were also suggested by Udacity. Below the final architecture is depicted by using the Keras function model.summary().
 
 ![alt text][image2]
 
@@ -62,7 +62,7 @@ First the model as depicted in the image was reproduced - including image croppi
 
 To capture good driving behavior, two laps were recorded in the Udacity simulator: one in a clock-wise direction and other counter-clockwise. For someone who does not play video games it was a matter of learning to use the control keys. The goal was to avoid the model to the biased towards left turns (clock-wise) or right turns (counter clock-wise). In addition, during the driving the car was steered to wander off to the side of the road and then steer back to the middle. The goal here was to collect data that will help the model to learn what to do if the car gets off to the side of the road. All collected data was merged with the data provided from Udacity. 
 
-Each data sample contains the steering angle/measurement as well as three images captured from three cameras installed at three different locations in the car [left, center, right]. To augment the data set, a flipping of the images and a change the sign of the steering angle was performed (see model.py lines 105-106). A histogram of the steering angle/measurements data is shown below.
+Each data sample contains the steering angle/measurement as well as three images captured from three cameras installed at three different locations in the car [left, center, right]. To augment the data set, a flipping of the images and a change the sign of the steering angle was performed (see model.py lines 107-108). A histogram of the steering angle/measurements data is shown below.
 
 ![alt text][image3]
 
@@ -71,15 +71,15 @@ One can see that the large proportion of training data points is where the steer
 A python generator was used to generate samples for each batch of data that would be fed when training and validating the network. A generator is usefull in order not to store a lot of data 
 unnecessarily and only use the memory that we need to use at a time. 
 
-The data was randomly shuffled before (see in model.py line 111) splitting it into training data (80 %) and validation data (20%) (see in model.py line 121). In total, I had 19286 training data points and 4822 validation data points. 
+The data was randomly shuffled before (see in model.py line 112) splitting it into training data (80 %) and validation data (20%) (see in model.py line 123). In total, I had 19286 training data points and 4822 validation data points. 
 
 #### Data Preprocessing
 
 The data preprocessing employed was simple and consisted of three steps:
 
-* Cropping the images from the top and from the bottom to focus on the road surface. The cropping of these pixels does not have useful information i.w. sky, tree, car dashboard. (see in model.py line 70)
-* Normalizing the data to the range [-0.5, 0.5] (see in model.py line 72)
-* The left and right camera images where introduced with a correction factor on the angle to help the car go back to the lane (see in model.py line 60-61)
+* Cropping the images from the top and from the bottom to focus on the road surface. The cropping of these pixels does not have useful information i.w. sky, tree, car dashboard. (see in model.py line 72)
+* Normalizing the data to the range [-0.5, 0.5] (see in model.py line 74)
+* The left and right camera images where introduced with a correction factor on the angle to help the car go back to the lane (see in model.py line 62-63)
 
 The steps above are part of the model itself and with that applied on the training, the validation set and also available while driving in autonomous mode using the model.
 
