@@ -44,7 +44,7 @@ Udacity provided very well guideline how to start and proceed with the building 
 
 #### 1. Starting Architecture 
 
-As mentioned above the way to finding the final solution was started by a simple model containing a single convolution layer, and gradually introducing more complexity. As suggested by Udacity, the NVidia model (https://arxiv.org/pdf/1604.07316v1.pdf) was implemented with a slight addition i.e. the dropout layers). The decision to introduce the dropout layers was in order to avoid overfitting. One could potentially use L1 or L2 regularization for the same purpose. In the next step, an image-cropping layer and a normalization of the date at the beginning of the network was introduced.
+As mentioned above the way to finding the final solution was started by a simple model containing a single convolution layer, and gradually introducing more complexity. As suggested by Udacity, the NVidia model (https://arxiv.org/pdf/1604.07316v1.pdf) was implemented with a slight addition i.e. the dropout layers. The decision to introduce the dropout layers was in order to avoid overfitting. One could potentially use L1 or L2 regularization for the same purpose. In addition, an image-cropping layer and a normalization of the date at the beginning of the network was introduced. Last but not least, a new layer at the end was added in order to have a single output as it was required i.e. the steering angle. 
 
 #### 2. Final Model Architecture
 
@@ -71,14 +71,15 @@ One can see that the large proportion of training data points is where the steer
 A python generator was used to generate samples for each batch of data that would be fed when training and validating the network. A generator is usefull in order not to store a lot of data 
 unnecessarily and only use the memory that we need to use at a time. 
 
-The data was randomly shuffled before (see in model.py line 111) splitting it into training data (80 %) and validation data (20%). In total, I had 19286 training data points and 4822 validation data points. 
+The data was randomly shuffled before (see in model.py line 111) splitting it into training data (80 %) and validation data (20%) (see in model.py line 121). In total, I had 19286 training data points and 4822 validation data points. 
 
 #### Data Preprocessing
 
-The data preprocessing employed was simple and consisted of two steps:
+The data preprocessing employed was simple and consisted of three steps:
 
 * Cropping the images from the top and from the bottom to focus on the road surface. The cropping of these pixels does not have useful information i.w. sky, tree, car dashboard. (see in model.py line 70)
 * Normalizing the data to the range [-0.5, 0.5] (see in model.py line 72)
+* The left and right camera images where introduced with a correction factor on the angle to help the car go back to the lane (see in model.py line 60-61)
 
 The steps above are part of the model itself and with that applied on the training, the validation set and also available while driving in autonomous mode using the model.
 
