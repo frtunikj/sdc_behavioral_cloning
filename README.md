@@ -35,4 +35,4 @@ NOTE: The last Linux version of the simulator was not working on my VM Linux. I 
 
 License
 ---
-This project copyright is under [MIT](https://github.com/frtunikj/sdc_finding_lane_lines/blob/master/LICENCE) License.
+This project copyright is under [MIT](https://github.com/frtunikj/sdc_behavioral_cloning/blob/master/LICENCE) License.
